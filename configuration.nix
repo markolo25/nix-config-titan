@@ -5,10 +5,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+
+  imports = [ ./hardware-configuration.nix ] ++ (lib.fileset.toList ./installed);
 
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
