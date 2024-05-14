@@ -113,6 +113,7 @@
     htop
     wget
     curl
+    nixfmt
     git
   ];
 

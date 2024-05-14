@@ -26,18 +26,7 @@
           "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "amanda";
-          "force group" = "groupname";
-      };
-      Downloads = {
-          path = /mnt/athena/Downloads;
-          browseable = "yes";
-          "read only" = "no";
-          "guest ok" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "username";
-          "force group" = "groupname";
+          "valid users" = "amanda";
       };
       Mark = {
           path = /mnt/athena/Mark;
@@ -46,28 +35,16 @@
           "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "markolo25";
-          "force group" = "groupname";
+          "valid users" = "markolo25";
       };
       pwmanager = {
           path = /mnt/athena/pwmanager;
           browseable = "yes";
           "read only" = "no";
-          "guest ok" = "yes";
+          "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "username";
-          "force group" = "groupname";
-      };
-      Share = {
-          path = /mnt/athena/Share;
-          browseable = "yes";
-          "read only" = "no";
-          "guest ok" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "username";
-          "force group" = "groupname";
+          "valid users" = "markolo25";
       };
       torrentclient = {
           path = /mnt/athena/torrentclient;
@@ -79,15 +56,23 @@
           "force user" = "username";
           "force group" = "groupname";
       };
-      Video = {
-          path = /mnt/athena/Video;
+      Downloads = {
+          path = /mnt/athena/Downloads;
           browseable = "yes";
           "read only" = "no";
           "guest ok" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          "force user" = "username";
-          "force group" = "groupname";
+      };
+      Share = {
+          path = /mnt/athena/Share;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+      };
+      Video = {
+          path = /mnt/athena/Share;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
       };
   };
 };
