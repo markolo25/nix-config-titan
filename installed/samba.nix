@@ -23,10 +23,10 @@
           path = /mnt/athena/Amanda;
           browseable = "yes";
           "read only" = "no";
-          "guest ok" = "yes";
+          "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "username";
+          "force user" = "amanda";
           "force group" = "groupname";
       };
       Downloads = {
@@ -43,10 +43,10 @@
           path = /mnt/athena/Mark;
           browseable = "yes";
           "read only" = "no";
-          "guest ok" = "yes";
+          "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "username";
+          "force user" = "markolo25";
           "force group" = "groupname";
       };
       pwmanager = {
