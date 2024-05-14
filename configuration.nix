@@ -5,7 +5,6 @@
 { config, lib, pkgs, ... }:
 
 {
-
   imports = [ ./hardware-configuration.nix ] ++ (lib.fileset.toList ./installed);
 
   # Use the systemd-boot EFI boot loader.

@@ -1,37 +1,102 @@
 { config, lib, pkgs, ... }:
 {
-  services.nas = {
-    enable = true;
-    # Shares to configure with sensible defaults for Samba/NFS
-    shares = {
-      Amanda = {
+
+  services.samba = {
+  enable = true;
+  securityType = "user";
+  openFirewall = true;
+  extraConfig = ''
+    workgroup = WORKGROUP
+    server string = titan
+    netbios name = titan
+    security = user
+    #use sendfile = yes
+    #max protocol = smb2
+    # note: localhost is the ipv6 localhost ::1
+    hosts allow = 192.168.0. 127.0.0.1 localhost
+    hosts deny = 0.0.0.0/0
+    guest account = nobody
+    map to guest = bad user
+  '';
+  shares = {
+    Amanda = {
           path = /mnt/athena/Amanda;
-          nfs.enable = false;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
       Downloads = {
           path = /mnt/athena/Downloads;
-          nfs.enable = true;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
       Mark = {
           path = /mnt/athena/Mark;
-          nfs.enable = false;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
       pwmanager = {
           path = /mnt/athena/pwmanager;
-          nfs.enable = false;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
       Share = {
           path = /mnt/athena/Share;
-          nfs.enable = false;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
       torrentclient = {
           path = /mnt/athena/torrentclient;
-          nfs.enable = false;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
       Video = {
           path = /mnt/athena/Video;
-          nfs.enable = true;
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "username";
+          "force group" = "groupname";
       };
-    };
   };
+};
+
+      services.samba-wsdd = {
+        enable = true;
+        openFirewall = true;
+      };
+
+networking.firewall.enable = true;
+networking.firewall.allowPing = true;
 }
