@@ -101,11 +101,11 @@
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ firefox tree ];
   };
-  
+
   users.users.amanda = {
     isNormalUser = true;
-    extraGroups = ["wheel" "docker" ];
-    packages = with pkgs; [firefox tree ]; 
+    extraGroups = [ "wheel" "docker" ];
+    packages = with pkgs; [ firefox tree ];
   };
 
   # Enable the OpenSSH daemon.
@@ -116,7 +116,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ htop wget curl nixfmt git nfs-utils ];
+  environment.systemPackages = with pkgs; [ htop wget curl nixfmt git ];
 
   virtualisation = {
     docker = {

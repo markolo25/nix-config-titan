@@ -52,7 +52,7 @@
         "guest ok" = "yes";
         "create mask" = "0644";
         "directory mask" = "0755";
-	"valid users" = "markolo25 amanda";
+        "valid users" = "markolo25 amanda";
       };
       Downloads = {
         path = /mnt/athena/Downloads;
