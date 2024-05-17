@@ -5,47 +5,49 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ] ++ (lib.fileset.toList ./installed);
+  imports = [ ./hardware-configuration.nix ]
+    ++ (lib.fileset.toList ./installed);
 
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = false;
-  
+
   # Boot loader config for configuration.nix:
   boot.loader.grub = {
     enable = true;
     zfsSupport = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
-    mirroredBoots = [
-      { devices = [ "nodev"]; path = "/boot"; }
-    ];
+    mirroredBoots = [{
+      devices = [ "nodev" ];
+      path = "/boot";
+    }];
   };
 
-  fileSystems."/" =
-    { device = "zpool/root";
-      fsType = "zfs";
-    };
+  fileSystems."/" = {
+    device = "zpool/root";
+    fsType = "zfs";
+  };
 
-  fileSystems."/nix" =
-    { device = "zpool/nix";
-      fsType = "zfs";
-    };
+  fileSystems."/nix" = {
+    device = "zpool/nix";
+    fsType = "zfs";
+  };
 
-  fileSystems."/var" =
-    { device = "zpool/var";
-      fsType = "zfs";
-    };
+  fileSystems."/var" = {
+    device = "zpool/var";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    { device = "zpool/home";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/62E9-2AE4";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/62E9-2AE4";
+    fsType = "vfat";
+  };
 
   swapDevices = [ ];
 
@@ -54,10 +56,12 @@
   boot.zfs.extraPools = [ "athena" ];
 
   networking.hostName = "titan"; # Define your hostname.
-  networking.hostId = (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
+  networking.hostId =
+    (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -95,10 +99,13 @@
   users.users.markolo25 = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox
-      tree
-    ];
+    packages = with pkgs; [ firefox tree ];
+  };
+  
+  users.users.amanda = {
+    isNormalUser = true;
+    extraGroups = ["wheel" "docker" ];
+    packages = with pkgs; [firefox tree ]; 
   };
 
   # Enable the OpenSSH daemon.
@@ -109,23 +116,17 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    htop
-    wget
-    curl
-    nixfmt
-    git
-  ];
+  environment.systemPackages = with pkgs; [ htop wget curl nixfmt git nfs-utils ];
 
   virtualisation = {
-  docker = {
-    enable = true;
-    autoPrune = {
+    docker = {
       enable = true;
-      dates = "weekly";
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
     };
   };
-};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

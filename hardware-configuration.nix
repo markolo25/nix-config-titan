@@ -4,40 +4,39 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "ahci" "mpt3sas" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "nvme" "ahci" "mpt3sas" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "wireguard" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "zpool/root";
-      fsType = "zfs";
-    };
+  fileSystems."/" = {
+    device = "zpool/root";
+    fsType = "zfs";
+  };
 
-  fileSystems."/nix" =
-    { device = "zpool/nix";
-      fsType = "zfs";
-    };
+  fileSystems."/nix" = {
+    device = "zpool/nix";
+    fsType = "zfs";
+  };
 
-  fileSystems."/var" =
-    { device = "zpool/var";
-      fsType = "zfs";
-    };
+  fileSystems."/var" = {
+    device = "zpool/var";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    { device = "zpool/home";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/62E9-2AE4";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/62E9-2AE4";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
 
   swapDevices = [ ];
 
@@ -53,5 +52,6 @@
   # networking.interfaces.enp73s0f3u1u1c2.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
