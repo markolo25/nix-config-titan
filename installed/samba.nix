@@ -67,7 +67,7 @@
         "guest ok" = "yes";
       };
       Video = {
-        path = /mnt/athena/Share;
+        path = /mnt/athena/Video;
         browseable = "yes";
         "read only" = "no";
         "guest ok" = "yes";
