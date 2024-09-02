@@ -8,6 +8,17 @@
   imports = [ ./hardware-configuration.nix ]
     ++ (lib.fileset.toList ./installed);
 
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+   boot.kernelParams = [
+    "initcall_blacklist=acpi_cpufreq_init"
+    "amd_pstate.shared_mem=1"
+    "amd-pstate=guided"
+  ];
+
+  virtualisation.libvirtd.enable = true;
+  boot.kernelModules = ["amd-pstate" "kvm-amd" "kvm-intel"];
+
+
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = false;
@@ -98,13 +109,13 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.markolo25 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "libvirtd"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ firefox tree ];
   };
 
   users.users.amanda = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "libvirtd"];
     packages = with pkgs; [ firefox tree ];
   };
 
@@ -116,7 +127,16 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ htop wget curl nixfmt git ];
+  environment.systemPackages = with pkgs; [ 
+	screen
+	htop 
+	wget 
+	curl 
+	nixfmt-classic 
+	git 
+	cpufrequtils 
+	pkgs.linuxKernel.packages.linux_6_6.cpupower
+  ];
 
   virtualisation = {
     docker = {
@@ -127,7 +147,7 @@
       };
     };
   };
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

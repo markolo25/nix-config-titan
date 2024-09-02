@@ -45,15 +45,6 @@
         "directory mask" = "0755";
         "valid users" = "markolo25";
       };
-      torrentclient = {
-        path = /mnt/athena/torrentclient;
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "valid users" = "markolo25 amanda";
-      };
       Downloads = {
         path = /mnt/athena/Downloads;
         browseable = "yes";
