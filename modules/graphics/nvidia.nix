@@ -5,11 +5,9 @@
   inputs,
   ...
 }: let
-    # nvidia package to patch
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  in
-
-{
+  # nvidia package to patch
+  package = config.boot.kernelPackages.nvidiaPackages.latest;
+in {
   options = {
     graphics.nvidia.enable =
       lib.mkEnableOption "enables nvidia graphics";

@@ -13,17 +13,21 @@
     #vscode-server
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-    home-manager-2505.url =
-      "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+    home-manager-2505.url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
     nixpkgs-2505.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }: {
-    devShells."x86_64-linux".default =
-      let pkgs = import inputs.nixpkgs-2505 { system = "x86_64-linux"; };
-      in pkgs.mkShell {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: {
+    devShells."x86_64-linux".default = let
+      pkgs = import inputs.nixpkgs-2505 {system = "x86_64-linux";};
+    in
+      pkgs.mkShell {
         NIX_CONFIG = "extra-experimental-features = nix-command";
         nativeBuildInputs = with pkgs; [
           screen
@@ -45,7 +49,7 @@
         specialArgs = inputs;
         modules = [
           ./hosts/titan
-         
+
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
           ./modules/services/nfs

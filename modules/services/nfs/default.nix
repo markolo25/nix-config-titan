@@ -1,5 +1,5 @@
 {
-services.nfs.server = {
+  services.nfs.server = {
     enable = true;
     # fixed rpc.statd port; for firewall
     lockdPort = 4001;
@@ -10,7 +10,7 @@ services.nfs.server = {
   networking.firewall = {
     enable = true;
     # for NFSv3; view with `rpcinfo -p`
-    allowedTCPPorts = [ 111 2049 4000 4001 4002 20048 ];
-    allowedUDPPorts = [ 111 2049 4000 4001 4002 20048 ];
+    allowedTCPPorts = [111 2049 4000 4001 4002 20048];
+    allowedUDPPorts = [111 2049 4000 4001 4002 20048];
   };
 }

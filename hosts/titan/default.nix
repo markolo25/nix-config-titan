@@ -1,19 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   # nvidia package to patch
   package = config.boot.kernelPackages.nvidiaPackages.latest;
   graphics.nvidia.enable = true;
   services.vscode-server.enable = true;
   services.zfs.autoScrub.enable = true;
-
-
 in {
   nixpkgs.config.allowUnfree = true;
-  imports = [ ./hardware-configuration.nix ]
+  imports =
+    [./hardware-configuration.nix]
     ++ (lib.fileset.toList ./installed);
 
   boot.kernelParams = [
@@ -22,8 +25,8 @@ in {
     "amd-pstate=guided"
   ];
 
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "athena" "hermes" ];
+  boot.supportedFilesystems = ["zfs"];
+  boot.zfs.extraPools = ["athena" "hermes"];
 
   # Boot loader config for configuration.nix:
   boot.loader.grub = {
@@ -31,10 +34,12 @@ in {
     zfsSupport = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
-    mirroredBoots = [{
-      devices = [ "nodev" ];
-      path = "/boot";
-    }];
+    mirroredBoots = [
+      {
+        devices = ["nodev"];
+        path = "/boot";
+      }
+    ];
   };
 
   fileSystems."/" = {
@@ -64,7 +69,7 @@ in {
 
   networking.hostName = "titan"; # Define your hostname.
   networking.hostId =
-    (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
+    builtins.substring 0 8 (builtins.readFile "/etc/machine-id");
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable =
@@ -107,6 +112,4 @@ in {
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
-
