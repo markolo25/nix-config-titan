@@ -4,5 +4,5 @@
   pkgs,
   ...
 }: {
-  inputs.services.vscode-server.enable = true;
+  services.vscode-server.enable = true;
 }

@@ -22,6 +22,8 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    vscode-server,
+    nvidia-patch,
     ...
   }: {
     devShells."x86_64-linux".default = let
@@ -46,10 +48,12 @@
     nixosConfigurations = {
       titan = inputs.nixpkgs-2505.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = inputs;
+        specialArgs = {inherit inputs;};
         modules = [
+          vscode-server.nixosModules.default
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
+          ./modules/graphics
           ./modules/services/nfs
           ./modules/services/samba
           ./modules/services/docker

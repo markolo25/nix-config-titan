@@ -8,7 +8,4 @@
   imports = [
     ./nvidia.nix
   ];
-
-  graphics.nvidia.enable =
-    lib.mkDefault true;
 }
