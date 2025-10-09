@@ -14,6 +14,6 @@
     allowedUDPPorts = [ 111 2049 4000 4001 4002 20048 ];
   };
   services.nfs.server.exports = ''
-    /mnt/athena/Video  192.168.1.0/24(rw,sync,no_subtree_check)
+    /mnt/athena/trunk  192.168.1.0/24(rw,sync,no_subtree_check)
   '';
 }
