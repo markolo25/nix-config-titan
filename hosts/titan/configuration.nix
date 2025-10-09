@@ -7,13 +7,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  # nvidia package to patch
-  package = config.boot.kernelPackages.nvidiaPackages.latest;
-  graphics.nvidia.enable = true;
-  services.vscode-server.enable = true;
-  services.zfs.autoScrub.enable = true;
-in {
+}: {
   nixpkgs.config.allowUnfree = true;
   imports =
     [./hardware-configuration.nix]
@@ -82,6 +76,10 @@ in {
     enable = true;
     settings.PasswordAuthentication = true;
   };
+
+  graphics.nvidia.enable = true;
+  services.vscode-server.enable = true;
+  services.zfs.autoScrub.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
