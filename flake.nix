@@ -48,14 +48,14 @@
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
-          ./hosts/titan
-
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
           ./modules/services/nfs
           ./modules/services/samba
           ./modules/services/docker
+          ./modules/services/vscode-server
           ./modules/packages
+          ./hosts/titan
         ];
       };
     };

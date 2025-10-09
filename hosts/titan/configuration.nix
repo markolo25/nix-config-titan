@@ -77,8 +77,6 @@
     settings.PasswordAuthentication = true;
   };
 
-  graphics.nvidia.enable = true;
-  services.vscode-server.enable = true;
   services.zfs.autoScrub.enable = true;
 
   # Open ports in the firewall.

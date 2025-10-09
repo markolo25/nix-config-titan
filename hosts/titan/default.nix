@@ -6,6 +6,4 @@
   ...
 }: {
   imports = [./configuration.nix];
-
-  graphics.nvidia.enable = true;
 }

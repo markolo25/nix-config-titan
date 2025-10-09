@@ -10,5 +10,5 @@
   ];
 
   graphics.nvidia.enable =
-    lib.mkDefault false;
+    lib.mkDefault true;
 }
