@@ -5,11 +5,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     #nvidia encoder/decoder limit patch
-    nvidia-patch.url = "github:icewind1991/nvidia-patch-nixos";
-    nvidia-patch.inputs.nixpkgs.follows = "nixpkgs";
+    nvidia-patch = {
+      url = "github:icewind1991/nvidia-patch-nixos/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     #vscode-server
-    inputs.vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     home-manager-2505.url =
       "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
@@ -20,7 +22,7 @@
 
   outputs = inputs@{ self, nixpkgs, ... }: {
     devShells."x86_64-linux".default =
-      let pkgs = import inputs.nixpkgs-2311 { system = "x86_64-linux"; };
+      let pkgs = import inputs.nixpkgs-2505 { system = "x86_64-linux"; };
       in pkgs.mkShell {
         NIX_CONFIG = "extra-experimental-features = nix-command";
         nativeBuildInputs = with pkgs; [
@@ -31,23 +33,25 @@
           nixfmt-classic
           git
           cpufrequtils
+          gnumake
           nvme-cli
           ipmitool
         ];
       };
 
     nixosConfigurations = {
-      titan = inputs.nixpkgs-2211.lib.nixosSystem {
+      titan = inputs.nixpkgs-2505.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
           ./hosts/titan
-          vscode-server.nixosModules.default
+         
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
           ./modules/services/nfs
           ./modules/services/samba
-          ./mixins/packages
+          ./modules/services/docker
+          ./modules/packages
         ];
       };
     };

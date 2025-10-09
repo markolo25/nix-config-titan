@@ -1,3 +1,4 @@
+{
 services.nfs.server = {
     enable = true;
     # fixed rpc.statd port; for firewall
@@ -12,3 +13,4 @@ services.nfs.server = {
     allowedTCPPorts = [ 111 2049 4000 4001 4002 20048 ];
     allowedUDPPorts = [ 111 2049 4000 4001 4002 20048 ];
   };
+}

@@ -2,12 +2,15 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
+let
+  # nvidia package to patch
+  package = config.boot.kernelPackages.nvidiaPackages.latest;
 
-{
+in {
   nixpkgs.config.allowUnfree = true;
-  imports = [./hardware-configuration.nix] 
-  ++ (lib.fileset.toList ./installed);
+  imports = [ ./hardware-configuration.nix ]
+    ++ (lib.fileset.toList ./installed);
 
   boot.kernelParams = [
     "initcall_blacklist=acpi_cpufreq_init"
@@ -58,7 +61,6 @@
   services.vscode-server.enable = true;
   services.zfs.autoScrub.enable = true;
 
-
   networking.hostName = "titan"; # Define your hostname.
   networking.hostId =
     (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
@@ -75,30 +77,7 @@
     settings.PasswordAuthentication = true;
   };
 
- 
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-      };
-    };
-  };
-
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    # The P600 does not support the newer open-source kernel modules, so keep this false.
-    open = false;
-    # Enable NVIDIA modesetting
-    modesetting.enable = true;
-    # Prevent graphical issues after suspend/resume
-    # Note: This is an experimental option. Check the NixOS wiki for potential issues.
-    powerManagement.enable = true;
-  };
-  hardware.nvidia-container-toolkit.enable = true;
+  graphics.nvidia.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
