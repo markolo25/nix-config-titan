@@ -15,11 +15,8 @@
     "amd-pstate=guided"
   ];
 
-  services.vscode-server.enable = true;
-
-  # Use the systemd-boot EFI boot loader.
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "athena" "hermes" ];
 
   # Boot loader config for configuration.nix:
   boot.loader.grub = {
@@ -58,10 +55,9 @@
     fsType = "vfat";
   };
 
-  swapDevices = [ ];
+  services.vscode-server.enable = true;
   services.zfs.autoScrub.enable = true;
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "athena" "hermes" ];
+
 
   networking.hostName = "titan"; # Define your hostname.
   networking.hostId =
@@ -74,88 +70,12 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.markolo25 = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ firefox tree ];
-  };
-
-  users.users.amanda = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "libvirtd" ];
-    packages = with pkgs; [ firefox tree ];
-  };
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    screen
-    htop
-    wget
-    curl
-    nixfmt-classic
-    git
-    cpufrequtils
-    nvme-cli
-    ipmitool
-  ];
+ 
 
   virtualisation = {
     docker = {

@@ -42,15 +42,12 @@
         specialArgs = inputs;
         modules = [
           ./hosts/titan
-
-          (import "${inputs.home-manager-2505}/nixos")
-          (import ./modules/users/markolo25.nix { stateVersion = "25.05"; })
-          (import ./modules/users/amanda.nix { stateVersion = "25.05"; })
-
-          ./mixins/base
-          ./mixins/tailscale
-          ./mixins/flatpak
-          ./mixins/virtualization
+          vscode-server.nixosModules.default
+          (import ./modules/users/markolo25.nix)
+          (import ./modules/users/amanda.nix)
+          ./modules/services/nfs
+          ./modules/services/samba
+          ./mixins/packages
         ];
       };
     };
