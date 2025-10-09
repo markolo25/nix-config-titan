@@ -6,6 +6,10 @@
 let
   # nvidia package to patch
   package = config.boot.kernelPackages.nvidiaPackages.latest;
+  graphics.nvidia.enable = true;
+  services.vscode-server.enable = true;
+  services.zfs.autoScrub.enable = true;
+
 
 in {
   nixpkgs.config.allowUnfree = true;
@@ -58,9 +62,6 @@ in {
     fsType = "vfat";
   };
 
-  services.vscode-server.enable = true;
-  services.zfs.autoScrub.enable = true;
-
   networking.hostName = "titan"; # Define your hostname.
   networking.hostId =
     (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
@@ -76,8 +77,6 @@ in {
     enable = true;
     settings.PasswordAuthentication = true;
   };
-
-  graphics.nvidia.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
