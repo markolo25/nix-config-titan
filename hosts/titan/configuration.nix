@@ -21,6 +21,7 @@
 
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.extraPools = ["athena" "hermes"];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Boot loader config for configuration.nix:
   boot.loader.grub = {
