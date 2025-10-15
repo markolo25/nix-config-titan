@@ -60,6 +60,7 @@
           ./modules/services/samba
           ./modules/services/docker
           ./modules/services/vscode-server
+          ./modules/services/libvirtd
           ./modules/packages
           ./hosts/titan
         ];
