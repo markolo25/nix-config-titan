@@ -1,9 +1,9 @@
- {
+{
   config,
   pkgs,
   ...
 }: {
- # List packages installed in system profile. To search, run:
+  # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     screen
@@ -15,5 +15,6 @@
     cpufrequtils
     nvme-cli
     ipmitool
+    unzip
   ];
 }

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
 {
-    users.users.amanda = {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  users.users.amanda = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "libvirtd" ];
-    packages = with pkgs; [ firefox tree ];
+    extraGroups = ["wheel" "docker" "libvirtd" "samba_users"];
+    packages = with pkgs; [firefox tree];
   };
-
 }

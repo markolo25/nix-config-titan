@@ -51,6 +51,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           vscode-server.nixosModules.default
+          (import ./modules/users/containerUser.nix)
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
           ./modules/graphics
