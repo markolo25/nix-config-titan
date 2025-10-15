@@ -8,5 +8,6 @@
     isNormalUser = true;
     extraGroups = ["wheel" "docker" "libvirtd" "samba_users"];
     packages = with pkgs; [firefox tree];
+    uid = 1001;
   };
 }
