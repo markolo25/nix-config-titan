@@ -16,5 +16,6 @@
     nvme-cli
     ipmitool
     unzip
+    nvitop
   ];
 }

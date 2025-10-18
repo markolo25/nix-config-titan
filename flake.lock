@@ -63,6 +63,27 @@
         "type": "github"
       }
     },
+    "nixos-nvidia-vgpu": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755446555,
+        "narHash": "sha256-z7vsNVCG+Qu7uDSDwCojnf4I/5PHRIGm7c+3IpmUjBk=",
+        "owner": "Yeshey",
+        "repo": "nixos-nvidia-vgpu",
+        "rev": "75d3415729abbba747c5dfb6d58342139707653f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Yeshey",
+        "ref": "535.129",
+        "repo": "nixos-nvidia-vgpu",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1753345091,
@@ -149,6 +170,7 @@
         "flake-compat": "flake-compat",
         "home-manager-2505": "home-manager-2505",
         "nixos-hardware": "nixos-hardware",
+        "nixos-nvidia-vgpu": "nixos-nvidia-vgpu",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-2505": "nixpkgs-2505",
         "nvidia-patch": "nvidia-patch",
