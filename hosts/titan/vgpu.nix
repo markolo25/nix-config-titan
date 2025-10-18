@@ -20,8 +20,8 @@
       # };
     };
   };
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vgpu_17_3;
-
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vgpu_18_0;
+  hardware.nvidia.gsp.enable = false;
   programs.mdevctl = {
     enable = true;
   };

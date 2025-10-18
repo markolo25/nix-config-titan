@@ -18,7 +18,7 @@
 
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
 
-    vgpu4nixos.url = "github:mrzenc/vgpu4nixos";
+    vgpu4nixos.url = "github:a-chaudhari/vgpu4nixos";
 
     fastapi-dls-nixos = {
       url = "github:mrzenc/fastapi-dls-nixos";

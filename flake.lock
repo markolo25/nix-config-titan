@@ -246,15 +246,15 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1752922034,
-        "narHash": "sha256-TEnXV2H4sc3Liav+uC5/Fao6M5QDSaRlRhycyXBtwd0=",
-        "owner": "mrzenc",
+        "lastModified": 1756389126,
+        "narHash": "sha256-hcxjmVi8yEU05Or53isP/t3uKGs1w+M8FU7c+PJw0vw=",
+        "owner": "a-chaudhari",
         "repo": "vgpu4nixos",
-        "rev": "fd1fe577e07e76d97a33a845f3b751dcb984a3d3",
+        "rev": "4bd7f4fb5fb6393d3111c2a52e2db02f70c16273",
         "type": "github"
       },
       "original": {
-        "owner": "mrzenc",
+        "owner": "a-chaudhari",
         "repo": "vgpu4nixos",
         "type": "github"
       }
