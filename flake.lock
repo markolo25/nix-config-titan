@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "fastapi-dls-nixos": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1751916690,
+        "narHash": "sha256-Z8dlCaEoVVMc2VwvXSXRD4GhtItsdXOU1RBZEsVAsbo=",
+        "owner": "mrzenc",
+        "repo": "fastapi-dls-nixos",
+        "rev": "2606db50c88e177fa56753b056cd0365a82ea3c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrzenc",
+        "repo": "fastapi-dls-nixos",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1733328505,
@@ -63,27 +83,6 @@
         "type": "github"
       }
     },
-    "nixos-nvidia-vgpu": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1755446555,
-        "narHash": "sha256-z7vsNVCG+Qu7uDSDwCojnf4I/5PHRIGm7c+3IpmUjBk=",
-        "owner": "Yeshey",
-        "repo": "nixos-nvidia-vgpu",
-        "rev": "75d3415729abbba747c5dfb6d58342139707653f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Yeshey",
-        "ref": "535.129",
-        "repo": "nixos-nvidia-vgpu",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1753345091,
@@ -132,6 +131,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1744440957,
+        "narHash": "sha256-FHlSkNqFmPxPJvy+6fNLaNeWnF1lZSgqVCl/eWaJRc4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "26d499fc9f1d567283d5d56fcf367edd815dba1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1682134069,
         "narHash": "sha256-TnI/ZXSmRxQDt2sjRYK/8j8iha4B4zP2cnQCZZ3vp7k=",
         "owner": "NixOS",
@@ -167,13 +182,14 @@
     },
     "root": {
       "inputs": {
+        "fastapi-dls-nixos": "fastapi-dls-nixos",
         "flake-compat": "flake-compat",
         "home-manager-2505": "home-manager-2505",
         "nixos-hardware": "nixos-hardware",
-        "nixos-nvidia-vgpu": "nixos-nvidia-vgpu",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-2505": "nixpkgs-2505",
         "nvidia-patch": "nvidia-patch",
+        "vgpu4nixos": "vgpu4nixos",
         "vscode-server": "vscode-server"
       }
     },
@@ -225,10 +241,28 @@
         "type": "github"
       }
     },
+    "vgpu4nixos": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1752922034,
+        "narHash": "sha256-TEnXV2H4sc3Liav+uC5/Fao6M5QDSaRlRhycyXBtwd0=",
+        "owner": "mrzenc",
+        "repo": "vgpu4nixos",
+        "rev": "fd1fe577e07e76d97a33a845f3b751dcb984a3d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrzenc",
+        "repo": "vgpu4nixos",
+        "type": "github"
+      }
+    },
     "vscode-server": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1753541826,

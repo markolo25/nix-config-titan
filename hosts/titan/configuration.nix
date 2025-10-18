@@ -17,6 +17,7 @@
     "initcall_blacklist=acpi_cpufreq_init"
     "amd_pstate.shared_mem=1"
     "amd-pstate=guided"
+    "amd_iommu=on"
   ];
 
   boot.supportedFilesystems = ["zfs"];

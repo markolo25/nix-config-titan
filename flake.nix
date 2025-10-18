@@ -18,11 +18,12 @@
 
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
 
-    nixos-nvidia-vgpu = {
-      url = "github:Yeshey/nixos-nvidia-vgpu/535.129";
+    vgpu4nixos.url = "github:mrzenc/vgpu4nixos";
 
-      # comment this line and a specific older revision
-      # of nixpkgs known to work will be used
+    fastapi-dls-nixos = {
+      url = "github:mrzenc/fastapi-dls-nixos";
+      # use nixpkgs provided by system to save some space
+      # do not use this in case of problems
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -33,7 +34,8 @@
     nixpkgs,
     vscode-server,
     nvidia-patch,
-    nixos-nvidia-vgpu,
+    vgpu4nixos,
+    fastapi-dls-nixos,
     ...
   }: {
     devShells."x86_64-linux".default = let
@@ -64,7 +66,7 @@
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
           ./modules/users/containerUser
-          ./modules/graphics
+          ./modules/graphics/nvidia
           ./modules/services/nfs
           ./modules/services/samba
           ./modules/services/docker
@@ -73,23 +75,10 @@
           ./modules/packages
           ./hosts/titan
           nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-cpu-pstate
-          nixos-hardware.nixosModules.common-cpu-zenpower
-          nixos-nvidia-vgpu.nixosModules.default
-          {
-            hardware.nvidia.vgpu = {
-              enable = true; # Install NVIDIA KVM vGPU + GRID driver + Activates required systemd services
-              vgpu_driver_src.sha256 = "sha256-tFgDf7ZSIZRkvImO+9YglrLimGJMZ/fz25gjUT0TfDo=";
-              pinKernel = false; # pins and installs a specific version of the 6.1 Kernel, recommended only if experiencing problems
-              fastapi-dls = {
-                # License server for unrestricted use of the vgpu driver in guests
-                enable = true;
-                #local_ipv4 = "192.168.1.109"; # Hostname is autodetected, use this setting to override
-                #timezone = "Europe/Lisbon"; # detected automatically (needs to be the same as the tz in the VM)
-                #docker-directory = "/mnt/dockers"; # default is "/opt/docker"
-              };
-            };
-          }
+          nixos-hardware.nixosModules.common-cpu-amd-pstate
+          nixos-hardware.nixosModules.common-cpu-amd-zenpower
+          vgpu4nixos.nixosModules.host
+          fastapi-dls-nixos.nixosModules.default
         ];
       };
     };

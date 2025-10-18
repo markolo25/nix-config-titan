@@ -17,5 +17,6 @@
     ipmitool
     unzip
     nvitop
+    pciutils
   ];
 }
