@@ -29,6 +29,7 @@
 
   outputs = inputs @ {
     self,
+    nixos-hardware,
     nixpkgs,
     vscode-server,
     nvidia-patch,
@@ -60,7 +61,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           vscode-server.nixosModules.default
-
           (import ./modules/users/markolo25.nix)
           (import ./modules/users/amanda.nix)
           ./modules/users/containerUser
@@ -72,6 +72,9 @@
           ./modules/services/libvrtd
           ./modules/packages
           ./hosts/titan
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-cpu-pstate
+          nixos-hardware.nixosModules.common-cpu-zenpower
           nixos-nvidia-vgpu.nixosModules.default
           {
             hardware.nvidia.vgpu = {

@@ -5,5 +5,8 @@
   inputs,
   ...
 }: {
-  imports = [./configuration.nix];
+  imports = [
+    ./configuration.nix
+    ./vgpu.nix
+  ];
 }
