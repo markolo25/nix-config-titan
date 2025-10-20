@@ -81,6 +81,24 @@
           fastapi-dls-nixos.nixosModules.default
         ];
       };
+
+    athena = inputs.nixpkgs-2505.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          vscode-server.nixosModules.default
+          (import ./modules/users/markolo25.nix)
+          (import ./modules/users/amanda.nix)
+          ./modules/users/containerUser
+          ./modules/graphics/nvidia
+          ./modules/services/nfs
+          ./modules/services/samba
+          ./modules/services/docker
+          ./modules/services/vscode-server
+          ./modules/packages
+          ./hosts/athena
+        ];
+      };
     };
   };
 }

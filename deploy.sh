@@ -1,1 +1,1 @@
-sudo nixos-rebuild switch --flake .#titan
+sudo nixos-rebuild switch --flake .#athena
