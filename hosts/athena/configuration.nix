@@ -44,14 +44,6 @@
     variant = "";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.markolo25 = {
-    isNormalUser = true;
-    description = "Mark Mendoza";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
-
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.extraPools = ["athena" "hermes"];
   nix.settings.experimental-features = ["nix-command" "flakes"];
