@@ -56,6 +56,9 @@
   boot.zfs.extraPools = ["athena" "hermes"];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  networking.hostName = "athena"; # Define your hostname.
+  networking.hostId = "eff8208f";
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
