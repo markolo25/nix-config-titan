@@ -6,10 +6,10 @@
   ...
 }: let
   # nvidia package to patch
-  package = config.boot.kernelPackages.nvidiaPackages.vgpu_16_5;
+  package = config.boot.kernelPackages.nvidiaPackages.stable
 in {
-  # nixpkgs.overlays = [inputs.nvidia-patch.overlays.default];
-  # hardware.nvidia.package = pkgs.nvidia-patch.patch-nvenc (pkgs.nvidia-patch.patch-fbc package);
+  nixpkgs.overlays = [inputs.nvidia-patch.overlays.default];
+   hardware.nvidia.package = pkgs.nvidia-patch.patch-nvenc (pkgs.nvidia-patch.patch-fbc package);
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
