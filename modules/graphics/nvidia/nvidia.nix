@@ -6,7 +6,7 @@
   ...
 }: let
   # nvidia package to patch
-  package = config.boot.kernelPackages.nvidiaPackages.stable
+  package = config.boot.kernelPackages.nvidiaPackages.stable;
 in {
   nixpkgs.overlays = [inputs.nvidia-patch.overlays.default];
    hardware.nvidia.package = pkgs.nvidia-patch.patch-nvenc (pkgs.nvidia-patch.patch-fbc package);
