@@ -36,6 +36,14 @@
         "create mask" = "0644";
         "directory mask" = "0755";
       };
+      "containers" = {
+        "path" = "/mnt/hermes/containers";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
       "trunk" = {
         "path" = "/mnt/athena/trunk";
         "browseable" = "yes";
