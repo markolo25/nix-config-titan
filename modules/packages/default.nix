@@ -18,5 +18,6 @@
     unzip
     nvitop
     pciutils
+    smartmontools
   ];
 }
