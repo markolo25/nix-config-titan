@@ -48,6 +48,10 @@
   #boot.zfs.extraPools = ["athena" "hermes"];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  
+  services.smartd.enable = true;
+  services.smartd.autodetect = true; 
+ 
   networking.hostId = "eff8208f";
 
   # Allow unfree packages
