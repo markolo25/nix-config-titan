@@ -45,7 +45,7 @@
   };
 
   boot.supportedFilesystems = ["zfs"];
-  boot.zfs.extraPools = ["athena" "hermes"];
+  #boot.zfs.extraPools = ["athena" "hermes"];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.hostId = "eff8208f";
