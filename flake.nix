@@ -9,6 +9,11 @@
       url = "github:icewind1991/nvidia-patch-nixos/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    #scrutiny
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    jnsgruk.url = "github:jnsgruk/nixos-config";
+    jnsgruk.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     #vscode-server
     vscode-server.url = "github:nix-community/nixos-vscode-server";
