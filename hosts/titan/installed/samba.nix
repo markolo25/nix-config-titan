@@ -6,6 +6,17 @@
 }: {
   services.samba = {
     settings = {
+      "amandaold" = {
+        "path" = "/mnt/hermes/amanda";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "valid users" = "amanda";
+        "force user" = "amanda";
+        "force group" = "users";
+      };
       "amanda" = {
         "path" = "/mnt/athena/amanda";
         "browseable" = "yes";
