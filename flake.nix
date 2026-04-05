@@ -100,13 +100,13 @@
           ./hosts/athena
         ];
       };
-    };
-    mark-desktop = inputs.nixpkgs-2511.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/mark-desktop
-        ];
+      mark-desktop = inputs.nixpkgs-2511.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs;};
+          modules = [
+            ./hosts/mark-desktop
+          ];
+        };
       };
     };
 }
