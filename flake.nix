@@ -100,5 +100,12 @@
         ];
       };
     };
+    mark-desktop = inputs.nixpkgs-2505.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/mark-desktop
+        ];
+      };
   };
 }

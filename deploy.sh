@@ -1,1 +1,1 @@
-sudo nixos-rebuild switch --upgrade --flake .#athena
+sudo nixos-rebuild switch --upgrade --flake .#mark-desktop

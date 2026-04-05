@@ -1,0 +1,13 @@
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}: {
+  imports = [
+    ./configuration.nix
+    ./hardware-configuration.nix
+    ./nvidia.nix
+  ];
+}
