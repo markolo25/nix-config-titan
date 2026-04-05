@@ -108,5 +108,5 @@
           ./hosts/mark-desktop
         ];
       };
-  };
+    };
 }
