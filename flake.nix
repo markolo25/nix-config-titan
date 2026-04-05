@@ -15,6 +15,7 @@
 
     home-manager-2505.url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
     nixpkgs-2505.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
 
@@ -100,7 +101,7 @@
         ];
       };
     };
-    mark-desktop = inputs.nixpkgs-2505.lib.nixosSystem {
+    mark-desktop = inputs.nixpkgs-2511.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
