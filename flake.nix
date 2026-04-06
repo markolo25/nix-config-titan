@@ -29,80 +29,90 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixos-hardware,
-    nixpkgs,
-    vscode-server,
-    nvidia-patch,
-    vgpu4nixos,
-    fastapi-dls-nixos,
-    ...
-  }: {
-    devShells."x86_64-linux".default = let
-      pkgs = import inputs.nixpkgs-2505 {system = "x86_64-linux";};
-    in
-      pkgs.mkShell {
-        NIX_CONFIG = "extra-experimental-features = nix-command";
-        nativeBuildInputs = with pkgs; [
-          screen
-          htop
-          wget
-          curl
-          nixfmt-classic
-          git
-          cpufrequtils
-          gnumake
-          nvme-cli
-          ipmitool
-        ];
-      };
+  outputs =
+    inputs@{
+      self,
+      nixos-hardware,
+      nixpkgs,
+      vscode-server,
+      nvidia-patch,
+      vgpu4nixos,
+      fastapi-dls-nixos,
+      ...
+    }:
+    {
+      devShells."x86_64-linux".default =
+        let
+          pkgs = import inputs.nixpkgs-2505 { system = "x86_64-linux"; };
+        in
+        pkgs.mkShell {
+          NIX_CONFIG = "extra-experimental-features = nix-command";
+          nativeBuildInputs = with pkgs; [
+            screen
+            htop
+            wget
+            curl
+            nixfmt-classic
+            git
+            cpufrequtils
+            gnumake
+            nvme-cli
+            ipmitool
+          ];
+        };
 
-    nixosConfigurations = {
-      titan = inputs.nixpkgs-2505.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          vscode-server.nixosModules.default
-          (import ./modules/users/markolo25.nix)
-          (import ./modules/users/amanda.nix)
-          ./modules/users/containerUser
-          ./modules/graphics/nvidia
-          ./modules/services/nfs
-          ./modules/services/samba
-          ./modules/services/docker
-          ./modules/services/vscode-server
-          ./modules/services/libvrtd
-          ./modules/packages
-          ./hosts/titan
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-cpu-amd-zenpower
-          vgpu4nixos.nixosModules.host
-          fastapi-dls-nixos.nixosModules.default
-        ];
-      };
-
-    athena = inputs.nixpkgs-2505.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          vscode-server.nixosModules.default
-          (import ./modules/users/markolo25.nix)
-          (import ./modules/users/amanda.nix)
-          ./modules/users/containerUser
-          ./modules/graphics/nvidia
-          ./modules/services/nfs
-          ./modules/services/samba
-          ./modules/services/docker
-          ./modules/services/vscode-server
-          ./modules/packages
-          ./hosts/athena
-        ];
-      };
-      mark-desktop = inputs.nixpkgs-2511.lib.nixosSystem {
+      nixosConfigurations = {
+        titan = inputs.nixpkgs-2505.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {inherit inputs;};
+          specialArgs = { inherit inputs; };
+          modules = [
+            vscode-server.nixosModules.default
+            (import ./modules/users/markolo25.nix)
+            (import ./modules/users/amanda.nix)
+            ./modules/users/containerUser
+            ./modules/graphics/nvidia
+            ./modules/services/nfs
+            ./modules/services/samba
+            ./modules/services/docker
+            ./modules/services/vscode-server
+            ./modules/services/libvrtd
+            ./modules/packages
+            ./hosts/titan
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-cpu-amd-pstate
+            nixos-hardware.nixosModules.common-cpu-amd-zenpower
+            vgpu4nixos.nixosModules.host
+            fastapi-dls-nixos.nixosModules.default
+          ];
+        };
+
+        athena = inputs.nixpkgs-2505.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            vscode-server.nixosModules.default
+            (import ./modules/users/markolo25.nix)
+            (import ./modules/users/amanda.nix)
+            ./modules/users/containerUser
+            ./modules/graphics/nvidia
+            ./modules/services/nfs
+            ./modules/services/samba
+            ./modules/services/docker
+            ./modules/services/vscode-server
+            ./modules/packages
+            ./hosts/athena
+          ];
+        };
+        apollo = inputs.nixpkgs-2511.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/mark-desktop
+          ];
+        };
+        mark-desktop = inputs.nixpkgs-2511.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/mark-desktop
           ];
